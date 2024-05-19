@@ -37,7 +37,7 @@ export const searchWeb = async (
 export const search: IFunction = {
     type: "function",
     function: {
-        name: "search_api",
+        name: "web_search_api",
         description: "Search the web for a given query",
         parameters: {
             type: "object",

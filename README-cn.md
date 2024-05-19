@@ -1,24 +1,10 @@
 # personal-ai-ts
 
-这是一个无需专用硬件设备即可与 Apple Shortcuts 等客户端协同工作的个人 AI 工具。来自：[Sh4yy/personal-ai](https://github.com/Sh4yy/personal-ai) 和 [honojs/hono-minimal](https://github.com/honojs/hono-minimal)。
+这是一个无需专用硬件设备即可与 Apple Shortcuts 等客户端协同工作的个人 AI 工具。来自：[fatwang2/siri-ultra](https://github.com/fatwang2/siri-ultra), [Sh4yy/personal-ai](https://github.com/Sh4yy/personal-ai) 和 [honojs/hono-minimal](https://github.com/honojs/hono-minimal)。
 
 ## 工作原理
 
 助手运行在 Cloudflare Workers 上，可以与任何 LLM 模型配合工作。
-
-# 使用方法
-
-## 方法一：直接设置快捷指令
-
-1. **安装快捷指令**：
-   - 点击 [此链接](https://search2ai.online/siri002) 进行安装。
-
-2. **配置**：
-   - 打开快捷指令，按照提示输入必要的变量。
-
-   > **注意**：如果没有部署服务器，安全性不高，api_key 配置到服务器 api，暴露密钥!!!
-
-## 方法二：设置自托管版本
 
 ### 入门指南
 
@@ -73,15 +59,15 @@
 运行 `npx wrangler deploy` 以部署 worker。
 
 ### 注意
-使用其他如 `https://siri-ultra.<your-username>.workers.dev/` api 设置 config api_key 不安全，仅适用于本地服务器。（如果某些应用客户端需要添加 api_key，您需要谨慎）
+使用其他如 `https://personal-ai-ts.<your-username>.workers.dev/` api 设置 config api_key 不安全，仅适用于本地服务器。（如果某些应用客户端需要添加 api_key，您需要谨慎）
 
-### 客户端
-#### 设置 Apple Shortcut
+## 客户端
+### 设置 Apple Shortcut
 
 1. **安装快捷指令**：
-   - 使用 [此链接](https://search2ai.online/siri002) 安装快捷指令。
+   - 可以使用 [此链接](https://search2ai.online/siri002) 安装快捷指令, 进行修改。
 
 2. **配置快捷指令**：
 更多详情： https://support.apple.com/zh-cn/guide/shortcuts/welcome/ios
-   - 打开快捷指令并将 `URL` 字段替换为您的 worker URL。
-   - 如果您未更改默认名称，URL 应为 `https://siri-ultra.<your-username>.workers.dev`。
+   - 打开快捷指令并将 `URL` 字段替换为您的 worker URL。如果您未更改默认名称，URL 应为 `https://personal-ai-ts.<your-username>.workers.dev`。
+   - 要配置 Apple Shortcut，以便将请求发送到 Cloudflare Worker，您需要更改 URL 字段中的 config 参数，以符合 src/index.ts 文件中的 POST / 路由 API 请求参数格式。

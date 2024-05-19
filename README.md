@@ -1,24 +1,11 @@
 # personal-ai-ts 
 
-This is a personal ai tool that works with clients, such as Apple Shortcuts removing the need for a dedicated hardware device. from: [Sh4yy/personal-ai](https://github.com/Sh4yy/personal-ai) & [honojs/hono-minimal](https://github.com/honojs/hono-minimal)
+This is a personal ai tool that works with clients, such as Apple Shortcuts removing the need for a dedicated hardware device. from: [fatwang2/siri-ultra](https://github.com/fatwang2/siri-ultra), [Sh4yy/personal-ai](https://github.com/Sh4yy/personal-ai) & [honojs/hono-minimal](https://github.com/honojs/hono-minimal)
 
 ## How it works
 
 The assistant is run on Cloudflare Workers and can work with any LLM model. 
 
-
-# Usage
-
-## Method 1: Setting Up the Shortcut Directly
-1. **Install the Shortcut**: 
-   - Click [this link](https://search2ai.online/siri002) to install.
-
-2. **Configure**: 
-   - Open the Shortcut, follow prompts to input necessary variables.
-
-  > **NOTE**: if no deploy your server, unsafety, api_key config to server api， Exposed key!!!
-
-## Method 2: Setting Up the Self-Hosted Version
 
 ### Getting Started
 
@@ -74,16 +61,16 @@ The assistant is run on Cloudflare Workers and can work with any LLM model.
 To deploy the worker, run `npx wrangler deploy`.
 
 ### NOTE
-use other like `https://siri-ultra.<your-username>.workers.dev/` api to set config api_key is not safety, just for local server. （if some app client want to add api_key, u need be careful）
+use other like `https://personal-ai-ts.<your-username>.workers.dev/` api to set config api_key is not safety, just for local server. （if some app client want to add api_key, u need be careful）
 
 ### Clients
 #### Setting Up the Apple Shortcut
 
 1. **Install the shortcut**:
-   - Use [this link](https://search2ai.online/siri002) to install the shortcut.
+   - Use [this link](https://search2ai.online/siri002) to install the shortcut, then edit it,
 
 2. **Configure the shortcut**:
 more detail: https://support.apple.com/zh-cn/guide/shortcuts/welcome/ios
-   - Open the shortcut and replace the `URL` field with your worker's URL.
-   - If you didn't change the default name, the URL should be `https://siri-ultra.<your-username>.workers.dev`.
+   - Open the shortcut and replace the `URL` field with your worker's URL. If you didn't change the default name, the URL should be `https://personal-ai-ts.<your-username>.workers.dev`.
+   - change `URL` field `config` param, see `src/index.ts` post `/` router api request params. 
 
