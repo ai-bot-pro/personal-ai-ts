@@ -59,6 +59,36 @@ export const handle = async (req: IRequest): Promise<string> => {
     });
     console.log("ask_response:", ask);
     console.log("message:", ask.choices[0].message);
+
+    // bad case to fix....
+    if (openai.model.includes("mixtral-8x7b-32768")
+      && ask.choices[0].message.content) {
+      //content: '{"tool_call":{"id":"pending","type":"function","function":{"name":"web_search_api"},"parameters":{"query":"北京今天天气"}}}'
+      try {
+        const parsedObject = JSON.parse(ask.choices[0].message.content);
+        const tool_calls: Array<OpenAI.Chat.Completions.ChatCompletionMessageToolCall> = [{
+          id: parsedObject['tool_call']['id'],
+          type: 'function',
+          function: {
+            name: parsedObject['tool_call']['function']['name'],
+            arguments: parsedObject['tool_call']['function']['parameters']
+          },
+        }];
+        ask.choices[0].message.tool_calls = tool_calls;
+        ask.choices[0].finish_reason = "tool_calls";
+        console.log("mixtral-8x7b-32768 changed message:", ask.choices[0].message);
+      } catch (error) {
+        console.log("Failed to change mixtral-8x7b-32768 message,continue; error:", error);
+      }
+    }
+
+    /*
+      message: {
+        role: 'assistant',
+        tool_calls: [ { id: 'call_n5e2', type: 'function', function: [Object] } ]
+      }
+      tool.function: { name: 'web_search_api', arguments: '{"query":"北京天气"}' }
+    */
     if (ask.choices[0].message.tool_calls) {
       chat.add(req.request.chat_id, {
         role: "assistant",
