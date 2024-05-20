@@ -66,7 +66,7 @@
 ### 设置 Apple Shortcut
 
 1. **安装快捷指令**：
-   - 可以使用 [此链接](https://search2ai.online/siri002) 安装快捷指令, 进行修改。
+   - 可以使用 [此链接](https://www.icloud.com/shortcuts/a41b2aad91ff47719b7ea114ed2ee294) 安装快捷指令, 进行修改。
 
 2. **配置快捷指令**：
 更多详情： https://support.apple.com/zh-cn/guide/shortcuts/welcome/ios

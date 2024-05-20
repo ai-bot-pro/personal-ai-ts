@@ -1,4 +1,4 @@
-# personal-ai-ts 
+# personal-ai-ts [中文](./README-cn.md)
 
 This is a personal ai tool that works with clients, such as Apple Shortcuts removing the need for a dedicated hardware device. from: [fatwang2/siri-ultra](https://github.com/fatwang2/siri-ultra), [Sh4yy/personal-ai](https://github.com/Sh4yy/personal-ai) & [honojs/hono-minimal](https://github.com/honojs/hono-minimal)
 
@@ -68,7 +68,7 @@ use other like `https://personal-ai-ts.<your-username>.workers.dev/` api to set 
 #### Setting Up the Apple Shortcut
 
 1. **Install the shortcut**:
-   - Use [this link](https://search2ai.online/siri002) to install the shortcut, then edit it,
+   - Use [this link](https://www.icloud.com/shortcuts/a41b2aad91ff47719b7ea114ed2ee294) to install the shortcut, then edit it,
 
 2. **Configure the shortcut**:
 more detail: https://support.apple.com/zh-cn/guide/shortcuts/welcome/ios
