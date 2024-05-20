@@ -24,7 +24,7 @@ export const getClient = (req: IRequest): { client: OpenAI; model: string } => {
 export const handle = async (req: IRequest): Promise<string> => {
   const openai = getClient(req);
   const defaultSystemPrompt = `
-    You are Siri Ultra. Answer in 1-2 sentences. Be friendly, helpful and concise. 
+    You are oligei. Answer in 1-2 sentences. Be friendly, helpful and concise. 
     Default to metric units when possible. Keep the conversation short and sweet. 
     You only answer in text. Don't include links or any other extras. 
     Don't respond with computer code, for example don't return user longitude.
@@ -46,12 +46,15 @@ export const handle = async (req: IRequest): Promise<string> => {
   let response = "";
   const func_tools: IFunction[] = FunctionHandler.getFunctions(req);
   while (true) {
+    // @todo: check messages length for llm context length limit
+    const msgs: Array<OpenAI.Chat.ChatCompletionMessageParam> = [
+      { role: "system", content: system },
+      ...(await chat.get(req.request.chat_id)),
+    ];
+    console.log("ChatCompletionMessageParams:", msgs);
     const ask = await openai.client.chat.completions.create({
       model: openai.model,
-      messages: [
-        { role: "system", content: system },
-        ...(await chat.get(req.request.chat_id)),
-      ],
+      messages: msgs,
       tools: func_tools,
     });
     console.log("ask_response:", ask);

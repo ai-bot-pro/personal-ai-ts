@@ -16,18 +16,18 @@ export const searchWeb = async (
             "gl": "cn",
             "hl": "zh-cn",
             "page": "1",
-            "num": "10",
+            "num": "5",
         }),
     };
     try {
-        console.log("search options", options)
-        const response = await fetch(url, options);
+        const get_url = `${url}?${options.params}`;
+        const response = await fetch(get_url);
         console.log("search response", response)
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        return JSON.stringify(data);
+        return JSON.stringify(data["organic_results"]);
     } catch (error) {
         console.error("Failed to fetch search results:", error);
         return JSON.stringify({ error: "Failed to fetch search results" });

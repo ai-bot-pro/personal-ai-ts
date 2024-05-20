@@ -17,7 +17,7 @@ export const searchWeb = async (
       query: query,
       search_service: "google",
       image: false,
-      max_results: 10,
+      max_results: 5,
       crawl_results: 0,
     }),
   };

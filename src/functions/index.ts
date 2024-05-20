@@ -10,12 +10,11 @@ const getFunctions = (req?: IRequest): IFunction[] => {
 
   // add search func
   const search_func = getSearchFunc(req);
-  if (search_func == undefined) {
-    return functions;
+  if (search_func != undefined) {
+    functions.push(search_func);
   }
-  functions.push(search_func);
 
-  console.log("init functions", functions)
+  console.log("init functions", functions);
   return functions;
 };
 

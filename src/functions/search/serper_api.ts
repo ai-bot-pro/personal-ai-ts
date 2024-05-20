@@ -19,7 +19,7 @@ export const searchWeb = async (
             "gl": "cn",
             "hl": "zh-cn",
             "page": 1,
-            "num": 10,
+            "num": 5,
         }),
         redirect: 'follow',
     };

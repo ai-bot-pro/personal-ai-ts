@@ -26,7 +26,6 @@ export class ChatHistory {
       messages.push(message);
       await this.kv.put(chat_id, JSON.stringify(messages));
     }
-    console.log(chat_id, "add", JSON.stringify(this.kv.get(chat_id), null, 2));
   }
 
   async get(chat_id: string): Promise<ChatEntry[]> {
@@ -34,7 +33,7 @@ export class ChatHistory {
     if (!chat) {
       return [];
     }
-    console.log(chat_id, "chat:", chat);
+    //console.log(chat_id, "chat:", chat);
     return JSON.parse(chat);
   }
 
