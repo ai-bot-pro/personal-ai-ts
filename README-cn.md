@@ -34,7 +34,7 @@
    - 部署到线上时，运行 `npx wrangler secret put API_KEY` 以设置 [Groq](https://console.groq.com/login) 或 [OpenAI](https://openai.com/) 的 API 密钥。
 
    > **注意**：
-   > - 如果不需要搜索功能，您只能设置 API_KEY。
+   > - 如果不需要搜索功能，设置 API_KEY; SEARCH_NAME 设置为空“”。
    > - 部署到线上设置密钥，如果在开发环境，创建 `.dev.vars` 文件，文件格式应类似 `dotenv` 文件，如 KEY=VALUE。
 
 7. **设置 Functions API 密钥**

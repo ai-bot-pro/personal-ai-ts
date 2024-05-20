@@ -28,7 +28,8 @@ export const searchWeb = async (
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    return JSON.stringify(data);
+    const snippets: string[] = data["results"].map((item: { snippet: any; }) => item.snippet);
+    return JSON.stringify(snippets);
   } catch (error) {
     console.error("Failed to fetch search results:", error);
     return JSON.stringify({ error: "Failed to fetch search results" });

@@ -35,7 +35,7 @@ The assistant is run on Cloudflare Workers and can work with any LLM model.
 - When deploy to online, Run `npx wrangler secret put API_KEY` to set the [Groq](https://console.groq.com/login) or [OpenAI](https://openai.com/) API key.
 
    > **Note**: 
-   > - You can only set API_KEY if you don't need search function
+   > - You can only set API_KEY and set SEARCH_NAME is empty "" if you don't need search function
    > - deploy online to set secret key, if dev, `touch .dev.vars` file, The .dev.vars file should be formatted like a `dotenv` file, such as KEY=VALUE
 
 7. **Set up Functions API keys**
