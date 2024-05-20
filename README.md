@@ -68,7 +68,7 @@ use other like `https://personal-ai-ts.<your-username>.workers.dev/` api to set 
 #### Setting Up the Apple Shortcut
 
 1. **Install the shortcut**:
-   - Use [this link](https://www.icloud.com/shortcuts/a41b2aad91ff47719b7ea114ed2ee294) to install the shortcut, then edit it,
+   - Use [this link](https://www.icloud.com/shortcuts/b5d380eb76ab48fab10a54d4b3d628c7) to install the shortcut, then edit it,
 
 2. **Configure the shortcut**:
 more detail: https://support.apple.com/zh-cn/guide/shortcuts/welcome/ios

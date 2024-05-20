@@ -8,10 +8,24 @@ import { ChatHistory } from "./history";
 const app = new Hono();
 
 app.post("/", async (c) => {
-  const body = (await c.req.json()) as IBody;
   try {
+    const body = (await c.req.json()) as IBody;
     console.log("body", JSON.stringify(body, null, 2));
     console.log("env", c.env);
+    if (body.chat_id != undefined
+      && body.chat_id.trim().length == 0) {
+      return c.json({
+        response: "need chat id",
+      });
+    }
+
+    if (body.config?.chat?.api_key != undefined
+      && body.config?.chat?.api_key.trim().length == 0) {
+      return c.json({
+        response: "need chat api_key",
+      });
+    }
+
     const response = await handle({
       env: c.env,
       request: body,
