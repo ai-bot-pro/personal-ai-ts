@@ -8,8 +8,12 @@ yarn.lock
 # Output of 'npm pack'
 *.tgz
 
+.demo
 .dev.vars
-wrangler.dev.toml
+wrangler-local.toml
+wrangler-prod.toml 
+#self test, if need, add wrangler.test.toml
+wrangler.prod.toml
 .wrangler
 
 # Author did not include the lockfile in the published package so I respect that.

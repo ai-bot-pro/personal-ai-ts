@@ -1,6 +1,12 @@
 # personal-ai-ts [中文](./README-cn.md)
 
-This is a personal ai tool that works with clients, such as Apple Shortcuts removing the need for a dedicated hardware device. from: [fatwang2/siri-ultra](https://github.com/fatwang2/siri-ultra), [Sh4yy/personal-ai](https://github.com/Sh4yy/personal-ai) & [honojs/hono-minimal](https://github.com/honojs/hono-minimal)
+This is a personal ai tool that works with clients, such as Apple Shortcuts removing the need for a dedicated hardware device. 
+it's begin from: [fatwang2/siri-ultra](https://github.com/fatwang2/siri-ultra), [Sh4yy/personal-ai](https://github.com/Sh4yy/personal-ai) & [honojs/hono-minimal](https://github.com/honojs/hono-minimal)
+
+# features
+- support search functions
+- support qianfan MaaS models
+
 
 ## How it works
 
@@ -18,15 +24,19 @@ The assistant is run on Cloudflare Workers and can work with any LLM model.
 3. **Authenticate with Cloudflare**:
    - Run `npx wrangler login` to log in to your Cloudflare account.
 
-4. **Create KV namespaces**:
-   - Run `npx wrangler kv:namespace create chats` to create a KV namespace. Note down the ID.
+4. **Create KV namespaces**: (remote kv (expire_ttl) -> local/edge kv(cache_ttl))
+   - Run `npx wrangler kv:namespace create chats` to create a KV namespace. Note down the ID, binding `ai_chats`.
+   - Run `npx wrangler kv:namespace create bots` to create a KV namespace. Note down the ID, binding `ai_bots`.
 
 5. **Configure the project**:
    - Update `wrangler.toml` with the namespace IDs:
 
    ```toml
       [[kv_namespaces]]
-      binding = "siri_ai_chats"
+      binding = "ai_chats"
+      id = "<id>"
+      [[kv_namespaces]]
+      binding = "ai_bots"
       id = "<id>"
     ```
 

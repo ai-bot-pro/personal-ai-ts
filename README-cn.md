@@ -2,6 +2,10 @@
 
 这是一个无需专用硬件设备即可与 Apple Shortcuts 等客户端协同工作的个人 AI 工具。来自：[fatwang2/siri-ultra](https://github.com/fatwang2/siri-ultra), [Sh4yy/personal-ai](https://github.com/Sh4yy/personal-ai) 和 [honojs/hono-minimal](https://github.com/honojs/hono-minimal)。
 
+# features
+- 支持搜索functions
+- 支持qianfan MaaS平台的chat模型
+
 ## 工作原理
 
 助手运行在 Cloudflare Workers 上，可以与任何 LLM 模型配合工作。
@@ -17,15 +21,19 @@
 3. **与 Cloudflare 进行身份验证**：
    - 运行 `npx wrangler login` 以登录到您的 Cloudflare 帐户。
 
-4. **创建 KV 命名空间**：
-   - 运行 `npx wrangler kv:namespace create chats` 以创建 KV 命名空间。记下 ID。
+4. **创建 KV 命名空间**：(remote kv (expire_ttl) -> local/edge kv(cache_ttl))
+   - 运行 `npx wrangler kv:namespace create chats` 以创建 KV 命名空间。记下 ID, binding `ai_chats`。
+   - 运行 `npx wrangler kv:namespace create bots` 以创建 KV 命名空间。记下 ID, binding `ai_bots`。
 
 5. **配置项目**：
    - 更新 `wrangler.toml` 文件中的命名空间 ID：
 
    ```toml
       [[kv_namespaces]]
-      binding = "siri_ai_chats"
+      binding = "ai_chats"
+      id = "<id>"
+      [[kv_namespaces]]
+      binding = "ai_bots"
       id = "<id>"
     ```
 
