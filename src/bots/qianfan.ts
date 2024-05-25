@@ -82,10 +82,17 @@ export class QianfanChatBot implements IChatBot {
         return response;
     }
 
-    public async chatWithFunctions(req: IRequest, chat: ChatHistory, system: string): Promise<string> {
+    public async chatWithQianfanActions(req: IRequest, chat: ChatHistory, system: string): Promise<string> {
         const qianfan = await this.initAuth(req);
         let response = "";
         //@todo: use ernie-func-8k https://cloud.baidu.com/doc/WENXINWORKSHOP/s/5ltxyqupn
+        return response;
+    }
+
+    public async chatWithFunctions(req: IRequest, chat: ChatHistory, system: string): Promise<string> {
+        const qianfan = await this.initAuth(req);
+        let response = "";
+        //@todo: use ERNIE 3.5 models https://cloud.baidu.com/doc/WENXINWORKSHOP/s/jlil56u11
         return response;
     }
 }
