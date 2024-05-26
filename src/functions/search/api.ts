@@ -1,4 +1,4 @@
-import { IFunction, IRequest, ISearch } from "../../type";
+import { IFunction, IRequest } from "../../type";
 import { serper } from "./serper_api";
 import { search1 } from "./search1_api";
 import { search } from "./search_api";

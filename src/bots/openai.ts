@@ -55,7 +55,7 @@ export class OpenAIChatBot implements IChatBot {
             const ask = await openai.client.chat.completions.create({
                 model: openai.model,
                 messages: msgs,
-                //tools: func_tools,
+                tools: func_tools,
             });
             console.log("ask_response:", ask);
             console.log("message:", ask.choices[0].message);

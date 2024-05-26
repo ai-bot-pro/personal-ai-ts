@@ -1,6 +1,6 @@
 import { IFunction, IRequest } from "../type";
 import { getFunction as getSearchFunc } from "./search/api";
-
+import { getFunction as getWeatherFunc } from "./weather/api";
 
 const getFunctions = (req?: IRequest): IFunction[] => {
   let functions: IFunction[] = [];
@@ -12,6 +12,12 @@ const getFunctions = (req?: IRequest): IFunction[] => {
   const search_func = getSearchFunc(req);
   if (search_func != undefined) {
     functions.push(search_func);
+  }
+
+  // add weather func
+  const weather_func = getWeatherFunc(req);
+  if (weather_func != undefined) {
+    functions.push(weather_func);
   }
 
   console.log("init functions", functions);

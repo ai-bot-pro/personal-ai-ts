@@ -10,6 +10,7 @@ yarn.lock
 
 .demo
 .dev.vars
+.env
 wrangler-local.toml
 wrangler-prod.toml 
 #self test, if need, add wrangler-test.toml

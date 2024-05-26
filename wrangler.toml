@@ -15,6 +15,10 @@ CHAT_TYPE = "chat"
 #functions
 #search_name: search_api | search1_api | serper_api
 SEARCH_NAME = "search_api"
+#weather https://openweathermap.org/api/one-call-3#multi
+OPENWEATHERMAP_LANGUAGE = "en"
+#https://openweathermap.org/api/one-call-3#data
+OPENWEATHERMAP_UNITS = "metric"
 
 # https://developers.cloudflare.com/kv/reference/kv-namespaces/
 [[kv_namespaces]]

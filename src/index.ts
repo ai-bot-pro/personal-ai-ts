@@ -19,13 +19,6 @@ app.post("/", async (c) => {
       });
     }
 
-    if (body.config?.chat?.api_key != undefined
-      && body.config?.chat?.api_key.trim().length == 0) {
-      return c.json({
-        response: "need chat api_key",
-      });
-    }
-
     const response = await handle({
       env: c.env,
       request: body,

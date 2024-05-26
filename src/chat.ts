@@ -33,11 +33,14 @@ export const handle = async (req: IRequest): Promise<string> => {
   const chat_conf = req.request.config?.chat;
   const customSystemPrompt = chat_conf?.system_prompt || req.env.SYSTEM_PROMPT || defaultSystemPrompt;
 
-  const system = `
+  let system = `
     ${customSystemPrompt}
     User's current info:
     date: ${req.request.date}
   `;
+  if (req.request.location?.latitude && req.request.location?.longitude) {
+    system += `lat: ${req.request.location.latitude}, lon:${req.request.location.longitude}`;
+  }
   const chat = ChatHistory.getInstance(req.env.ai_chats);
   await chat.add(req.request.chat_id, {
     role: "user",
@@ -45,17 +48,15 @@ export const handle = async (req: IRequest): Promise<string> => {
   });
 
   let response = "";
-  let content = "";
   try {
     response = await botChat(req, chat, system);
-    content = response;
   } catch (error) {
     console.log(error);
     response = "Sorry, I'm having trouble understanding your request. Please try again.";
   }
   await chat.add(req.request.chat_id, {
     role: "assistant",
-    content: content,
+    content: response,
   });
   return response;
 };

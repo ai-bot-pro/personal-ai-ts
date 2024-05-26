@@ -1,11 +1,11 @@
 # personal-ai-ts [中文](./README-cn.md)
 
 This is a personal ai tool that works with clients, such as Apple Shortcuts removing the need for a dedicated hardware device. 
-it's begin from: [fatwang2/siri-ultra](https://github.com/fatwang2/siri-ultra), [Sh4yy/personal-ai](https://github.com/Sh4yy/personal-ai) & [honojs/hono-minimal](https://github.com/honojs/hono-minimal)
+it's begin from: [fatwang2/siri-ultra](https://github.com/fatwang2/siri-ultra), [Sh4yy/personal-ai](https://github.com/Sh4yy/personal-ai)
 
-# features
+## Features
 - support search functions
-- support qianfan MaaS models
+- support qianfan MaaS chat bot models
 
 
 ## How it works
@@ -43,6 +43,9 @@ The assistant is run on Cloudflare Workers and can work with any LLM model.
 6. **Set up API keys**: 
 
 - When deploy to online, Run `npx wrangler secret put API_KEY` to set the [Groq](https://console.groq.com/login) or [OpenAI](https://openai.com/) API key.
+- qianfan Maas [app key](https://console.bce.baidu.com/qianfan/ais/console/applicationConsole/application):
+  - run `npx wrangler secret put QIANFAN_SECRET_KEY`
+  - run `npx wrangler secret put QIANFAN_API_KEY`
 
    > **Note**: 
    > - You can only set API_KEY and set SEARCH_NAME is empty "" if you don't need search function
@@ -53,6 +56,9 @@ The assistant is run on Cloudflare Workers and can work with any LLM model.
   - Run `npx wrangler secret put SERPER_API_KEY` to set the [serper API key](https://serper.dev/api-key).
   - Run `npx wrangler secret put SEARCH_API_KEY` to set the [Search API key](https://www.searchapi.io/api_tokens) .
   - Run `npx wrangler secret put SEARCH1_API_KEY` to set the [Search1API](https://www.search1api.com/) API key.
+- weather api key：
+  - run `npx wrangler secret put OPENWEATHERMAP_API_KEY`  to set the [openwethermap API key](https://home.openweathermap.org/api_keys)。
+
 
 
 8. **Update the LLMs Vars**:
@@ -64,6 +70,10 @@ The assistant is run on Cloudflare Workers and can work with any LLM model.
       SYSTEM_PROMPT = "You are oligei. Answer in 1-2 sentences. Be friendly, helpful and concise. Default to metric units when possible. Keep the conversation short and sweet. You only answer in raw text, no markdown format. Don't include links or any other extras. Don't respond with computer code, for example don't return user longitude."
       #search_name: search_api | search1_api | serper_api
       SEARCH_NAME = "serper_api"
+      #https://openweathermap.org/api/one-call-3#multi
+      OPENWEATHERMAP_LANGUAGE = "en"
+      #https://openweathermap.org/api/one-call-3#data
+      OPENWEATHERMAP_UNITS = "metric"
     ```
    > **Tips**: You can use ollama deploy local llm openai chat completions api
 
@@ -84,4 +94,44 @@ use other like `https://personal-ai-ts.<your-username>.workers.dev/` api to set 
 more detail: https://support.apple.com/zh-cn/guide/shortcuts/welcome/ios
    - Open the shortcut and replace the `URL` field with your worker's URL. If you didn't change the default name, the URL should be `https://personal-ai-ts.<your-username>.workers.dev`.
    - change `URL` field `config` param, see `src/index.ts` post `/` router api request params. 
+
+### API
+- `POST /`: AI chat API.
+```json
+  {
+    "config": {
+        "chat": {
+            "api_base": "https://api.groq.com/openai/v1/",
+            "model": "llama3-70b-8192",
+            "system_prompt": "You are oligei. Answer in 1-2 sentences. Be friendly, helpful and concise. Default to metric units when possible. Keep the conversation short and sweet. You only answer in raw text, no markdown format. Don't include links or any other extras. Don't respond with computer code, for example don't return user longitude.",
+            "api_key": ""
+        },
+        "qianfan": {
+            "model": "completions",
+            "api_key": "",
+            "secret_key": ""
+        },
+        "search": {
+            "search_name": "search_api",
+            "search_api_key": "",
+            "serper_api_key": "",
+            "search1_api_key": ""
+        },
+        "weather": {
+            "weather_name": "openweathermap_api",
+            "openweahtermap_api_key": ""
+        }
+    },
+    "location": {
+        "longitude": 116.40,
+        "latitude": 39.90
+    },
+    "chat_type": "chat_with_functions",
+    "chat_bot": "openai",
+    "chat_id": "349512281",
+    "input": "today weather",
+    "date": "2024/05/24 09:51"
+}
+```
+tips: in local dev, use .dev.vars file define api_key from env, 
 
